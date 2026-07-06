@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: #0a0e1a;
+    color: #c8d8f0;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0f1629;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #1e2d4a;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #00d4ff40;
+  }
+}
+
+@layer components {
+  /* Effet scanline cyberpunk */
+  .scanline {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scanline::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.4), transparent);
+    animation: scan 3s linear infinite;
+    pointer-events: none;
+  }
+
+  /* Bordure animée cyber */
+  .cyber-border {
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    position: relative;
+  }
+
+  .cyber-border::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 20px;
+    right: 20px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #00d4ff, transparent);
+  }
+
+  /* Texte monospace pour les IPs */
+  .font-code {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 0.8rem;
+  }
+
+  /* Badge de sévérité */
+  .badge-low {
+    @apply bg-emerald-900/40 text-emerald-400 border border-emerald-700/50;
+  }
+
+  .badge-medium {
+    @apply bg-yellow-900/40 text-yellow-400 border border-yellow-700/50;
+  }
+
+  .badge-high {
+    @apply bg-orange-900/40 text-orange-400 border border-orange-700/50;
+  }
+
+  .badge-critical {
+    @apply bg-red-900/40 text-red-400 border border-red-700/50;
+  }
+
+  /* Animation pulse pour les alertes critiques */
+  .alert-critical-pulse {
+    animation: criticalPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes criticalPulse {
+    0%, 100% { box-shadow: 0 0 5px rgba(255, 71, 87, 0.3); }
+    50% { box-shadow: 0 0 20px rgba(255, 71, 87, 0.6), 0 0 40px rgba(255, 71, 87, 0.2); }
+  }
+
+  /* Grille de fond hexagonale */
+  .hex-bg {
+    background-image: radial-gradient(circle at 1px 1px, rgba(0, 212, 255, 0.06) 1px, transparent 0);
+    background-size: 30px 30px;
+  }
+}
+
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(1000%); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.4s ease-out forwards;
+}
+
+/* Délais d'animation pour les cartes */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
